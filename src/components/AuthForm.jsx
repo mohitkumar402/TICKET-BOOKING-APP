@@ -85,7 +85,7 @@ export default function AuthForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid) {
-      navigate('/success', { state: { ...formData, formType } });
+      navigate('/successPage', { state: { ...formData, formType } });
     }
   };
 

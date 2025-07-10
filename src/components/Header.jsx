@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthForm from './AuthForm';
 
 const Header = ({ setActiveSection }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,8 +36,8 @@ const Header = ({ setActiveSection }) => {
 
         </form>
         <form className="auth-links">
-          <button onClick={() => navigate('/AuthForm')}>Login</button>
-            <button onClick={() => navigate('/AuthForm')}>Sign Up</button>
+          <button onClick={() => navigate('/Auth')}>Login</button>
+            <button onClick={() => navigate('/Auth')}>Sign Up</button>
         </form>
 
       </div>

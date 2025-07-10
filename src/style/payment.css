@@ -3,11 +3,11 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #e0f7fa;
+  background: #020202;
 }
 
 .payment-box {
-  background: white;
+  background: rgb(239, 160, 160);
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
