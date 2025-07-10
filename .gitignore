@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Firebase files
+.firebase/
+.firebaseproject
+
+# Firebase Hosting Cache# Ignore Firebase credentials
+backend/quickett-1b926-firebase-adminsdk-fbsvc-80bb4db488.json
+
+.firebaserc
+
+# Firebase local emulators
+firebase-debug.log
+firebase.json
+
+# Local env variables
+.env
+.env.local
+.env.*.local
+
+# VSCode settings
+.vscode/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS system files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+
