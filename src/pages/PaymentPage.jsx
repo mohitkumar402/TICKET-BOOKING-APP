@@ -1,34 +1,70 @@
-import { useNavigate } from 'react-router-dom';
-import '../style/payment.css';
+import { useLocation, Link } from 'react-router-dom';
+import '../style/success.css';
+import jsPDF from 'jspdf';
 
-const PaymentPage = () => {
-  const navigate = useNavigate();
+const PaymentSuccess = () => {
+  const { state } = useLocation();
+  const movie = state?.movie;
+  const seats = state?.seats || [];
 
-  const handleConfirm = () => {
-    // Simulate user clicking after scanning
-    navigate('/payment-confirmed');
+  const ticketCount = seats.length;
+  const seatPrice = 150;
+  const totalAmount = ticketCount * seatPrice;
+
+  const getPosterSrc = (path) => {
+    return path?.startsWith('/assets/')
+      ? path
+      : `https://image.tmdb.org/t/p/w500${path}`;
   };
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('🎟️ Ticket Confirmation', 20, 20);
+    doc.setFontSize(12);
+    doc.text(`Movie: ${movie?.title}`, 20, 35);
+    doc.text(`Tickets Booked: ${ticketCount}`, 20, 45);
+    doc.text(`Seat Numbers: ${seats.join(', ')}`, 20, 55);
+    doc.text(`Total Paid: ₹${totalAmount}`, 20, 65);
+    doc.text('✅ Payment Successful', 20, 75);
+    doc.text('Enjoy your show! 🍿', 20, 90);
+
+    doc.save(`${movie?.title.replace(/\s+/g, '_')}_Tickets.pdf`);
+  };
+
+  if (!movie) return <h2 className="error-msg">Movie not found.</h2>;
+
   return (
-    <div className="payment-wrapper">
-      <div className="payment-box">
-        <h2>Pay Now</h2>
-        <p>Scan the QR code below using any UPI app</p>
+    <div className="payment-success-page">
+      <div className="success-card">
+        <h1>✅ Payment Successful!</h1>
 
-        <img
-          src="./assets/upi-qr.jpg"
-          alt="QR Code"
-          className="qr-image"
-        />
-
-        <div className="payment-options">
-          <button onClick={handleConfirm}>I've Paid</button>
+        <div className="movie-info">
+          <h2>{movie?.title}</h2>
+          <img
+            src={getPosterSrc(movie?.poster_path)}
+            alt={movie?.title}
+            className="poster-success"
+          />
         </div>
 
-        <p className="note">Supported: UPI, PhonePe, GPay, Paytm</p>
+        <div className="booking-summary">
+          <p><strong>🎟️ Tickets Booked:</strong> {ticketCount}</p>
+          <p><strong>🪑 Seat Numbers:</strong> {seats.join(', ')}</p>
+          <p><strong>💰 Total Paid:</strong> ₹{totalAmount}</p>
+        </div>
+
+        <button onClick={generatePDF} className="pdf-download-button">
+          ⬇️ Download Ticket PDF
+        </button>
+
+        <p className="enjoy-text">🎬 Enjoy your show!</p>
+
+        <Link to="/" className="home-link">← Back to Home</Link>
       </div>
     </div>
   );
 };
 
-export default PaymentPage;
+export default PaymentSuccess;

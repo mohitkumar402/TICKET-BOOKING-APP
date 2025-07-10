@@ -1,5 +1,8 @@
 import { useLocation, Link } from 'react-router-dom';
 import '../style/success.css';
+import jsPDF from 'jspdf';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const PaymentSuccess = () => {
   const { state } = useLocation();
@@ -10,15 +13,34 @@ const PaymentSuccess = () => {
   const seatPrice = 150;
   const totalAmount = ticketCount * seatPrice;
 
-  // Determine poster path: local asset or TMDB
   const getPosterSrc = (path) => {
     return path?.startsWith('/assets/')
-      ? path // local image in public/assets/
+      ? path
       : `https://image.tmdb.org/t/p/w500${path}`;
   };
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('🎟️ Ticket Confirmation', 20, 20);
+    doc.setFontSize(12);
+    doc.text(`Movie: ${movie?.title}`, 20, 35);
+    doc.text(`Tickets Booked: ${ticketCount}`, 20, 45);
+    doc.text(`Seat Numbers: ${seats.join(', ')}`, 20, 55);
+    doc.text(`Total Paid: ₹${totalAmount}`, 20, 65);
+    doc.text('✅ Payment Successful', 20, 75);
+    doc.text('Enjoy your show! 🍿', 20, 90);
+
+    doc.save(`${movie?.title.replace(/\s+/g, '_')}_Tickets.pdf`);
+  };
+
+  if (!movie) return <h2 className="error-msg">Movie not found.</h2>;
+
   return (
     <div className="payment-success-page">
+      <Header />
+
       <div className="success-card">
         <h1>✅ Payment Successful!</h1>
 
@@ -37,10 +59,16 @@ const PaymentSuccess = () => {
           <p><strong>💰 Total Paid:</strong> ₹{totalAmount}</p>
         </div>
 
+        <button onClick={generatePDF} className="pdf-download-button">
+          ⬇️ Download Ticket PDF
+        </button>
+
         <p className="enjoy-text">🎬 Enjoy your show!</p>
 
         <Link to="/" className="home-link">← Back to Home</Link>
       </div>
+
+      <Footer />
     </div>
   );
 };
