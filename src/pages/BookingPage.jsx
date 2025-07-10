@@ -38,7 +38,7 @@ const BookingPage = () => {
       return;
     }
 
-    navigate('/payment-success', {
+    navigate('/Payment', {
       state: {
         movie,
         seats: selectedSeats,

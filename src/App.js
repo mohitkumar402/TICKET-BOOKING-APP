@@ -5,9 +5,9 @@ import ParticlesBG from './components/ParticlesBG';
 import HomePage from './pages/homepage';
 import BookingPage from './pages/BookingPage';
 import PaymentSuccess from './pages/PaymentSuccess';
-import PaymentPage from './pages/PaymentPage';
+import PaymentPage from './pages/PaymentPage';  // ✅ Rename `Payment` to `PaymentPage` for clarity
 import PaymentConfirmed from './pages/PaymentConfirmed';
-// Wrapper to use useLocation outside Router
+
 function AppWrapper() {
   const location = useLocation();
   const showParticles = location.pathname === "/" || location.pathname === "/success";
@@ -16,14 +16,13 @@ function AppWrapper() {
     <>
       {showParticles && <ParticlesBG />}
       <Routes>
-        <Route path="/auth" element={<AuthForm />} />
-        
         <Route path="/" element={<HomePage />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route path="/auth" element={<AuthForm />} />
         <Route path="/success" element={<SuccessPage />} />
-         <Route path="/book/:id" element={<BookingPage />} /> 
+        <Route path="/book/:id" element={<BookingPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-          <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment-confirmed" element={<PaymentConfirmed />} />
       </Routes>
     </>

@@ -13,7 +13,12 @@ const Header = ({ setActiveSection }) => {
   return (
     <header className="main-header">
       <div className="header-top">
-        <div className="logo">QUICKETT</div>
+        <div className="logo" onClick={() => navigate('/')}
+             style={{ cursor: 'pointer', color: '#e50914', fontSize: '2rem', fontWeight: 'bold' }}>
+          QUICKETT
+        </div>
+        
+        
         <nav className="nav-links">
           <button onClick={() => setActiveSection('movies')}>Movies</button>
           <button onClick={() => setActiveSection('shows')}>TV Shows</button>
