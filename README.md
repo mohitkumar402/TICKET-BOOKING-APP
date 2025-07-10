@@ -11,7 +11,7 @@ Developed during my **Celebal Summer Internship**, this project is focused on cr
 
 ## 🌐 Live Preview
 
-
+https://ticket-booking-app-theta.vercel.app/
 
 ---
 
