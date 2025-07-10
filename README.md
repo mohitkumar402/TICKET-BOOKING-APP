@@ -17,9 +17,6 @@ Developed during my **Celebal Summer Internship**, this project is focused on cr
 
 ## 📌 Project Status
 
-> 📆 **Currently in Week 1**  
-> ✅ Login/Registration with validations complete  
-> 🔨 Weekly updates planned
 
 ---
 
